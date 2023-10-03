@@ -1,6 +1,8 @@
 import { type ReactNode } from 'react'
 import Head from 'next/head'
 
+import { Navbar } from '../ui'
+
 interface ShopLayoutProps {
   children: ReactNode
   title: string
@@ -8,7 +10,12 @@ interface ShopLayoutProps {
   imageFullUrl?: string
 }
 
-export function ShopLayout({ children, title, pageDescription, imageFullUrl = '' }: ShopLayoutProps) {
+export function ShopLayout({
+  children,
+  title,
+  pageDescription,
+  imageFullUrl = ''
+}: ShopLayoutProps) {
   return (
     <>
       <Head>
@@ -21,7 +28,7 @@ export function ShopLayout({ children, title, pageDescription, imageFullUrl = ''
       </Head>
 
       <nav>
-        {/* TODO: Navbar */}
+        <Navbar />
       </nav>
 
       {/* TODO: Sidebar */}
