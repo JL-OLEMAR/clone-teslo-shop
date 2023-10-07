@@ -8,6 +8,9 @@ export const lightTheme = createTheme({
     },
     secondary: {
       main: '#3A64D8'
+    },
+    info: {
+      main: '#fff'
     }
   },
   components: {
@@ -23,7 +26,7 @@ export const lightTheme = createTheme({
       },
       styleOverrides: {
         root: {
-          backgroundColor: 'white',
+          backgroundColor: '#fff',
           height: 60
         }
       }
@@ -50,13 +53,12 @@ export const lightTheme = createTheme({
       defaultProps: {
         variant: 'contained',
         size: 'small',
-        disableElevation: true
+        disableElevation: true,
+        color: 'info'
       },
       styleOverrides: {
         root: {
           borderRadius: 10,
-          backgroundColor: 'white',
-          color: 'black',
           textTransform: 'none',
           boxShadow: 'none',
           ':hover': {
