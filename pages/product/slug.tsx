@@ -1,5 +1,6 @@
 import { Box, Button, Grid, Typography } from '@mui/material'
 import { initialData } from '@/database/products'
+import { ItemCounter } from '@/components/ui'
 import { ProductSlideshow } from '@/components/products'
 import { ShopLayout } from '@/components/layouts'
 
@@ -25,7 +26,7 @@ export default function Slug() {
             {/* Amount */}
             <Box sx={{ my: 2 }}>
               <Typography variant='subtitle2'>Amount</Typography>
-              {/* <ItemCounter /> */}
+              <ItemCounter />
               {/* <SizeSelector
                 sizes={product.sizes}
               /> */}
