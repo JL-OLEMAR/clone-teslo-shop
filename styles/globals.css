@@ -27,7 +27,9 @@
 }
 
 .circular-btn {
-  border-radius: 30px;
+  border-radius: 5px;
+  background-color: #3a64d8;
+  transition: background-color 0.3s;
 }
 
 .circular-btn:hover {

@@ -1,8 +1,8 @@
 import { Box, Button, Chip, Grid, Typography } from '@mui/material'
 import { initialData } from '@/database/products'
+import { ShopLayout } from '@/components/layouts'
 import { ItemCounter } from '@/components/ui'
 import { ProductSlideshow, SizeSelector } from '@/components/products'
-import { ShopLayout } from '@/components/layouts'
 
 const product = initialData.products[0]
 
@@ -27,9 +27,9 @@ export default function Slug() {
             <Box sx={{ my: 2 }}>
               <Typography variant='subtitle2'>Amount</Typography>
               <ItemCounter />
-              <SizeSelector
-                sizes={product.sizes}
-              />
+
+              {/* Sizes */}
+              <SizeSelector sizes={product.sizes} />
             </Box>
 
             {/* Add to cart button */}
