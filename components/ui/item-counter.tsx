@@ -4,7 +4,7 @@ import { RemoveCircleOutline, AddCircleOutline } from '@mui/icons-material'
 export function ItemCounter() {
   return (
     <Box display='flex' alignItems='center'>
-      <IconButton>
+      <IconButton sx={{ pl: 0 }}>
         <RemoveCircleOutline />
       </IconButton>
 

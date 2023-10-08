@@ -1,12 +1,13 @@
 import { Box, Button, Card, CardContent, Divider, Grid, Typography } from '@mui/material'
 import { ShopLayout } from '@/components/layouts'
+import { CartList } from '@/components/cart'
 
 export default function Cart() {
   return (
     <ShopLayout title='Cart' pageDescription='Store shopping cart'>
       <Grid container>
         <Grid item xs={12} sm={7}>
-          {/* <CartList /> */}
+          <CartList />
         </Grid>
 
         {/* Order */}
