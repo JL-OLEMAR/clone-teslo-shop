@@ -1,7 +1,7 @@
 import { type ReactNode } from 'react'
 import Head from 'next/head'
 
-import { Navbar } from '../ui'
+import { Navbar, SideMenu } from '../ui'
 
 interface ShopLayoutProps {
   children: ReactNode
@@ -31,7 +31,7 @@ export function ShopLayout({
         <Navbar />
       </nav>
 
-      {/* TODO: Sidebar */}
+      <SideMenu />
 
       <main style={{
         margin: '80px auto',
