@@ -19,7 +19,7 @@ export default function Cart() {
 
               <OrderSummary />
               <Box display='flex' justifyContent='end' sx={{ mt: 3 }}>
-                <Button sx={{ width: '100%' }} className='circular-btn' color='secondary'>
+                <Button color='secondary' className='circular-btn' fullWidth>
                   Checkout
                 </Button>
               </Box>

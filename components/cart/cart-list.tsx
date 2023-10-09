@@ -31,7 +31,7 @@ export function CartList({ canEditable = false }: Props) {
                 <CardMedia
                   component='img'
                   sx={{ borderRadius: '5px' }}
-                  image={`products/${prod.images[0]}`}
+                  image={`/products/${prod.images[0]}`}
                   alt={prod.title}
                 />
               </Link>
