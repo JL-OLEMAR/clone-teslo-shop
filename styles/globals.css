@@ -29,11 +29,20 @@
 .circular-btn {
   border-radius: 8px;
   background-color: #3a64d8;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .circular-btn:hover {
   background-color: #274494;
+}
+
+.custom-link {
+  text-decoration: none;
+  transition: text-decoration 0.3s;
+}
+
+.custom-link:hover {
+  text-decoration: underline;
 }
 
 .summary-card {

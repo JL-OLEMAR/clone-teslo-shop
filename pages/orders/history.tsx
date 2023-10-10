@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Chip, Grid, Typography } from '@mui/material'
-import { DataGrid, type GridValueGetterParams, type GridColDef } from '@mui/x-data-grid'
+import { DataGrid, type GridColDef, type GridRenderCellParams } from '@mui/x-data-grid'
 import { ShopLayout } from '@/components/layouts'
 
 const columns: GridColDef[] = [
@@ -11,7 +11,7 @@ const columns: GridColDef[] = [
     headerName: 'Paid',
     description: 'Display the information if the order is paid',
     width: 200,
-    valueGetter: (params: GridValueGetterParams) => {
+    renderCell: (params: GridRenderCellParams) => {
       return (
         params.row.paid
           ? <Chip color='success' label='Paid' variant='outlined' />
@@ -25,7 +25,7 @@ const columns: GridColDef[] = [
     description: 'Display the information if the order is paid',
     width: 200,
     sortable: false,
-    valueGetter: (params: GridValueGetterParams) => {
+    renderCell: (params: GridRenderCellParams) => {
       return (
         <Link href={`/orders/${params.row.id}`}>View order</Link>
       )
@@ -52,9 +52,8 @@ export default function History() {
           <DataGrid
             rows={rows}
             columns={columns}
-            pageSizeOptions={[10, 10]}
-          // pageSize={10}
-          // rowsPerPageOptions={[10]}
+            pageSize={10}
+            rowsPerPageOptions={[10]}
           />
         </Grid>
       </Grid>

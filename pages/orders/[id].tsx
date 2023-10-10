@@ -40,7 +40,7 @@ export default function Order() {
 
               <Box display='flex' justifyContent='space-between'>
                 <Typography variant='subtitle1'>Shipping Address</Typography>
-                <Link href='/checkout/address'>Edit</Link>
+                <Link href='/checkout/address' className='custom-link'>Edit</Link>
               </Box>
               <Typography>John Doe</Typography>
               <Typography>Street 123</Typography>
@@ -52,7 +52,7 @@ export default function Order() {
 
               <Box display='flex' justifyContent='space-between'>
                 <Typography variant='subtitle1'>Order Info</Typography>
-                <Link href='/cart'>Edit</Link>
+                <Link href='/cart' className='custom-link'>Edit</Link>
               </Box>
 
               <OrderSummary />

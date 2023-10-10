@@ -16,7 +16,7 @@ export default function Empty() {
         <RemoveShoppingCartOutlined sx={{ fontSize: 100 }} />
         <Box display='flex' flexDirection='column' alignItems='center'>
           <Typography>Your cart is empty!</Typography>
-          <Link href='/' style={{ textDecoration: 'none' }}>
+          <Link href='/' className='custom-link'>
             <Typography
               component='span'
               fontSize={24}
