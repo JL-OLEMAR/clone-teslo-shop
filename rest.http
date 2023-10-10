@@ -1,0 +1,5 @@
+@hostname = http://localhost:3000/api
+
+### Add products as a seed only in dev environment
+GET {{hostname}}/seed
+

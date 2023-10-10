@@ -12,6 +12,6 @@ docker-compose up -d
 
 Rename file **.env.example** to **.env.local**
 
-## Filling the db with test information
+## Add products as a seed only in dev environment
 
 Temporary endpoint: `http://localhost:3000/api/seed`
