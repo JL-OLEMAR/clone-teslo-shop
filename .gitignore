@@ -42,3 +42,5 @@ pnpm-lock.yaml
 .eslintcache
 dist
 build
+mongo/
+.env
