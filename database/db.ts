@@ -18,29 +18,23 @@ export const connect = async () => {
     return
   }
 
-  // If the connection is not open, open it, or select other options
-  if (mongoose.connections.length > 0) {
-    mongoConnection.isConnected = mongoose.connections[0].readyState
-
-    if (mongoConnection.isConnected === 1) {
-      console.log('=> ✅ using previous connection')
-      return
-    }
-
-    // finish the connection
-    await disconnect()
+  try {
+    await mongoose.connect(process.env.MONGO_SRV ?? '')
+    mongoConnection.isConnected = 1
+    console.log('=> 🚀 connected to MongoDB', process.env.MONGO_SRV)
+  } catch (error) {
+    console.error('Error connecting to MongoDB:', error)
   }
-
-  await mongoose.connect(process.env.MONGO_SRV ?? '')
-  mongoConnection.isConnected = 1
-  console.log('=> 🚀 connected to MongoDB', process.env.MONGO_SRV)
 }
 
 export const disconnect = async () => {
-  if (process.env.NODE_ENV === 'development') return
-  if (mongoConnection.isConnected === 0) return
+  if (process.env.NODE_ENV === 'development' || mongoConnection.isConnected === 0) return
 
-  await mongoose.disconnect()
-  mongoConnection.isConnected = 0
-  console.log('=> ❌ disconnected from MongoDB')
+  try {
+    await mongoose.disconnect()
+    mongoConnection.isConnected = 0
+    console.log('=> ❌ disconnected from MongoDB')
+  } catch (error) {
+    console.error('Error disconnecting from MongoDB:', error)
+  }
 }
