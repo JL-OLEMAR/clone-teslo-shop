@@ -1,4 +1,3 @@
 export * as db from './db'
-
-// DB Seed Data
-export * as seedDB from './products'
+export * as seedDB from './products' // DB Seed Data
+export * from './constants.d'

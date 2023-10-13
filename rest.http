@@ -3,3 +3,11 @@
 ### Add products as a seed only in dev environment
 GET {{hostname}}/seed
 
+### GetProducts by gender, default gender=all
+GET {{hostname}}/products?gender=men
+
+### GetProducts by slug
+GET {{hostname}}/products/mens_chill_crew_neck_sweatshirt
+
+### SearchProducts by query at (title and tags)
+GET {{hostname}}/search/shirt

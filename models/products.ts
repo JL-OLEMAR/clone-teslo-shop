@@ -19,19 +19,22 @@ const productSchema = new Schema({
   type: {
     type: String,
     enum: {
-      values: ['shirts', 'pants', 'hoodies', 'hats'], // FIXME: [] or ""
+      values: ['shirts', 'pants', 'hoodies', 'hats'],
       message: '{VALUE} is not supported type'
     }
   },
   gender: {
     type: String,
     enum: {
-      values: ['men', 'women', 'kid', 'unisex'], // FIXME: [] or ""
+      values: ['men', 'women', 'kid', 'unisex'],
       message: '{VALUE} is not supported gender'
     }
   }
 }, { timestamps: true }) // Add fields createdAt and updatedAt
 
-const Product: Model<IProduct> = mongoose.models.Product ?? model('Product', productSchema)
+// Add indexes for search
+productSchema.index({ title: 'text', tags: 'text' })
+
+const Product: Model<IProduct> = mongoose.models.Product || model('Product', productSchema)
 
 export default Product
