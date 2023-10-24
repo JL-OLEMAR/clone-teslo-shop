@@ -1,4 +1,16 @@
 import {
+  AccountCircleOutlined,
+  AdminPanelSettings,
+  CategoryOutlined,
+  ConfirmationNumberOutlined,
+  EscalatorWarningOutlined,
+  FemaleOutlined,
+  LoginOutlined,
+  MaleOutlined,
+  SearchOutlined,
+  VpnKeyOutlined
+} from '@mui/icons-material'
+import {
   Box,
   Divider,
   Drawer,
@@ -12,18 +24,6 @@ import {
   ListItemText,
   ListSubheader
 } from '@mui/material'
-import {
-  AccountCircleOutlined,
-  AdminPanelSettings,
-  CategoryOutlined,
-  ConfirmationNumberOutlined,
-  EscalatorWarningOutlined,
-  FemaleOutlined,
-  LoginOutlined,
-  MaleOutlined,
-  SearchOutlined,
-  VpnKeyOutlined
-} from '@mui/icons-material'
 
 export const SideMenu = () => {
   return (

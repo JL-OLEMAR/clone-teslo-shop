@@ -1,6 +1,7 @@
-import { useMemo, useState } from 'react'
-import Link from 'next/link'
 import { Box, Card, CardActionArea, CardMedia, Grid, Typography } from '@mui/material'
+import Link from 'next/link'
+import { useMemo, useState } from 'react'
+
 import { IProduct } from '@/interfaces'
 
 interface Props {
@@ -31,6 +32,8 @@ export function ProductCard({ product }: Props) {
               component='img'
               className='fadeIn'
               image={productImage}
+              sx={{ aspectRatio: '1/1', objectPosition: 'center' }}
+              loading='lazy'
               alt={`${product.title} image`}
             />
           </CardActionArea>

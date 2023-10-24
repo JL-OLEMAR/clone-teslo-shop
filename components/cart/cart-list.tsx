@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import { Box, Button, CardMedia, Grid, Typography } from '@mui/material'
+import Link from 'next/link'
 
 import { initialData } from '@/database/products'
 import { ItemCounter } from '../ui'

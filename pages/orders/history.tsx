@@ -1,6 +1,7 @@
-import Link from 'next/link'
 import { Chip, Grid, Typography } from '@mui/material'
 import { DataGrid, type GridColDef, type GridRenderCellParams } from '@mui/x-data-grid'
+import Link from 'next/link'
+
 import { ShopLayout } from '@/components/layouts'
 
 const columns: GridColDef[] = [

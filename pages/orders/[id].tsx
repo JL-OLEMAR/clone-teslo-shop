@@ -1,9 +1,9 @@
+import { CreditScoreOutlined } from '@mui/icons-material'
+import { Box, Card, CardContent, Chip, Divider, Grid, Typography } from '@mui/material'
 import Link from 'next/link'
-import { Box, Button, Card, CardContent, Chip, Divider, Grid, Typography } from '@mui/material'
-import { CreditCardOffOutlined, CreditScoreOutlined } from '@mui/icons-material'
 
-import { ShopLayout } from '@/components/layouts'
 import { CartList, OrderSummary } from '@/components/cart'
+import { ShopLayout } from '@/components/layouts'
 
 export default function Order() {
   return (

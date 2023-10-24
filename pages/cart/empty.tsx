@@ -1,7 +1,8 @@
-import { Box, Typography } from '@mui/material'
 import { RemoveShoppingCartOutlined } from '@mui/icons-material'
-import { ShopLayout } from '@/components/layouts'
+import { Box, Typography } from '@mui/material'
 import Link from 'next/link'
+
+import { ShopLayout } from '@/components/layouts'
 
 export default function Empty() {
   return (

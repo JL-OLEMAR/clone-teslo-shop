@@ -1,4 +1,5 @@
 import { Box, Typography } from '@mui/material'
+
 import { ShopLayout } from '@/components/layouts'
 
 export default function Custom404() {

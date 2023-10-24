@@ -1,8 +1,9 @@
-import { Box, Button, Chip, Grid, Typography } from '@mui/material'
-import { initialData } from '@/database/products'
+import { Box, Button, Grid, Typography } from '@mui/material'
+
 import { ShopLayout } from '@/components/layouts'
-import { ItemCounter } from '@/components/ui'
 import { ProductSlideshow, SizeSelector } from '@/components/products'
+import { ItemCounter } from '@/components/ui'
+import { initialData } from '@/database/products'
 
 const product = initialData.products[0]
 

@@ -1,5 +1,5 @@
+import { AddCircleOutline, RemoveCircleOutline } from '@mui/icons-material'
 import { Box, IconButton, Typography } from '@mui/material'
-import { RemoveCircleOutline, AddCircleOutline } from '@mui/icons-material'
 
 export function ItemCounter() {
   return (
