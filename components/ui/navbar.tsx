@@ -1,8 +1,12 @@
+import { SHOP_CONSTANTS } from '@/database'
 import { SearchOutlined, ShoppingCartOutlined } from '@mui/icons-material'
 import { AppBar, Badge, Box, Button, IconButton, Toolbar, Typography } from '@mui/material'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 export function Navbar() {
+  const { asPath } = useRouter()
+
   return (
     <AppBar>
       <Toolbar>
@@ -15,13 +19,13 @@ export function Navbar() {
 
         <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: 1 }}>
           <Link href='/category/men'>
-            <Button>Men</Button>
+            <Button color={asPath === '/category/men' ? 'primary' : 'info'}>Men</Button>
           </Link>
           <Link href='/category/women'>
-            <Button>Women</Button>
+            <Button color={asPath === '/category/women' ? 'primary' : 'info'}>Women</Button>
           </Link>
           <Link href='/category/kid'>
-            <Button>Kids</Button>
+            <Button color={asPath === '/category/kid' ? 'primary' : 'info'}>Kids</Button>
           </Link>
         </Box>
 

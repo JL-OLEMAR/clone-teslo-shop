@@ -12,6 +12,12 @@ docker-compose up -d
 
 Rename file **.env.example** to **.env.local**
 
+## Run commands
+
+```bash
+pnpm install && pnpm run dev
+```
+
 ## Add products as a seed only in dev environment
 
 Temporary endpoint: `http://localhost:3000/api/seed`

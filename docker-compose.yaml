@@ -6,3 +6,8 @@ services:
       - '27017:27017'
     volumes:
       - ./mongo:/data/db
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5' # Limitar a 0.5 núcleos de CPU (50% de un núcleo)
+          memory: 1.5G # Limitar a 2 gygabytes de memoria RAM (B K M G)

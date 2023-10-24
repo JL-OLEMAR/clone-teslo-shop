@@ -10,11 +10,12 @@ interface Props {
 
 export function ProductCard({ product }: Props) {
   const [isHovered, setIsHovered] = useState(false)
+  const [isImageLoaded, setIsImageLoaded] = useState(false)
 
   const productImage = useMemo(() => {
     return isHovered
-      ? `products/${product.images[1]}`
-      : `products/${product.images[0]}`
+      ? `/products/${product.images[1]}`
+      : `/products/${product.images[0]}`
   }, [isHovered, product.images])
 
   return (
@@ -29,18 +30,19 @@ export function ProductCard({ product }: Props) {
         <Link href='/product/slug' prefetch={false}>
           <CardActionArea>
             <CardMedia
+              sx={{ aspectRatio: '1/1', objectPosition: 'center' }}
+              image={productImage}
+              alt={`${product.title} image`}
+              onLoad={() => setIsImageLoaded(true)}
               component='img'
               className='fadeIn'
-              image={productImage}
-              sx={{ aspectRatio: '1/1', objectPosition: 'center' }}
               loading='lazy'
-              alt={`${product.title} image`}
             />
           </CardActionArea>
         </Link>
       </Card>
 
-      <Box sx={{ mt: 1 }} className='fadeIn'>
+      <Box sx={{ mt: 1, display: isImageLoaded ? 'block' : 'none' }} className='fadeIn'>
         <Typography fontWeight={700}>{product.title}</Typography>
         <Typography fontWeight={500}>{`$${product.price}`}</Typography>
       </Box>
