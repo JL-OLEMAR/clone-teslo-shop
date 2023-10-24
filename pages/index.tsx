@@ -1,9 +1,14 @@
 import { Typography } from '@mui/material'
-import { initialData } from '@/database/products'
+
 import { ShopLayout } from '@/components/layouts'
 import { ProductList } from '@/components/products'
+import { useProducts } from '@/hooks'
+
+const url = '/products'
 
 export default function Home() {
+  const { products, isLoading } = useProducts({ url })
+
   return (
     <ShopLayout
       title='Teslo Shop - Home'
@@ -12,7 +17,11 @@ export default function Home() {
       <Typography variant='h1' component='h1'>Store</Typography>
       <Typography variant='h2' sx={{ mb: 1 }}>All products</Typography>
 
-      <ProductList products={initialData.products as any} />
+      {
+        isLoading
+          ? <h2>Loading...</h2>
+          : <ProductList products={products} />
+      }
     </ShopLayout>
   )
 }

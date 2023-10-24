@@ -1,7 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { db, Method, SHOP_CONSTANTS } from '@/database'
-import { Product } from '@/models'
+
+import { Method, SHOP_CONSTANTS, db } from '@/database'
 import type { IProduct } from '@/interfaces'
+import { Product } from '@/models'
 
 type Data =
   | { message: string }
@@ -15,10 +16,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 }
 
 const getProducts = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
-  const { gender = 'all' } = req.query as { gender: string }
+  const { gender = 'all' } = req.query
   let condition = {}
 
-  if (gender !== 'all' && SHOP_CONSTANTS.validGenders.includes(gender)) {
+  if (gender !== 'all' && SHOP_CONSTANTS.validGenders.includes(`${gender}`)) {
     condition = { gender }
   }
 
