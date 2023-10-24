@@ -2,6 +2,7 @@ import { Typography } from '@mui/material'
 
 import { ShopLayout } from '@/components/layouts'
 import { ProductList } from '@/components/products'
+import { Loading } from '@/components/ui'
 import { useProducts } from '@/hooks'
 
 const url = '/products'
@@ -19,7 +20,7 @@ export default function Home() {
 
       {
         isLoading
-          ? <h2>Loading...</h2>
+          ? <Loading />
           : <ProductList products={products} />
       }
     </ShopLayout>
