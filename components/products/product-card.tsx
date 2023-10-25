@@ -27,7 +27,7 @@ export function ProductCard({ product }: Props) {
       onMouseLeave={() => setIsHovered(false)}
     >
       <Card>
-        <Link href='/product/slug' prefetch={false}>
+        <Link href={`/product/${product.slug}`} prefetch={false}>
           <CardActionArea>
             <CardMedia
               sx={{ aspectRatio: '1/1', objectPosition: 'center' }}
