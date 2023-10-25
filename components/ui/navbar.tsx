@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { MenuOutlined, SearchOutlined, ShoppingCartOutlined } from '@mui/icons-material'
 import { AppBar, Badge, Box, Button, IconButton, Toolbar, Typography } from '@mui/material'
-import { useUiContext } from '@/hooks/useUiContext'
+import { useUiContext } from '@/hooks'
 
 export function Navbar() {
   const { asPath } = useRouter()

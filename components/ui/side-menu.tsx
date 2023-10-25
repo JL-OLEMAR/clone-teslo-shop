@@ -25,7 +25,7 @@ import {
   ListItemText,
   ListSubheader
 } from '@mui/material'
-import { useUiContext } from '@/hooks/useUiContext'
+import { useUiContext } from '@/hooks'
 
 export const SideMenu = () => {
   const router = useRouter()
