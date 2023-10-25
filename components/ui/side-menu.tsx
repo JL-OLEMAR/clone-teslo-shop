@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation'
 import {
   AccountCircleOutlined,
   AdminPanelSettings,
@@ -24,12 +25,22 @@ import {
   ListItemText,
   ListSubheader
 } from '@mui/material'
+import { useUiContext } from '@/hooks/useUiContext'
 
 export const SideMenu = () => {
+  const router = useRouter()
+  const { isToggleMenu, toggleSideMenu } = useUiContext()
+
+  const navigateTo = (url: string) => {
+    router.push(url)
+    toggleSideMenu()
+  }
+
   return (
     <Drawer
-      open={false}
+      open={isToggleMenu}
       anchor='right'
+      onClose={toggleSideMenu}
       sx={{ backdropFilter: 'blur(4px)', transition: 'all 0.5s ease-out' }}
     >
       <Box sx={{ width: 250, paddingTop: 5 }}>
@@ -72,7 +83,10 @@ export const SideMenu = () => {
           </ListItem>
 
           <ListItem disablePadding>
-            <ListItemButton sx={{ display: { xs: '', sm: 'none' } }}>
+            <ListItemButton
+              onClick={() => navigateTo('/category/men')}
+              sx={{ display: { xs: '', sm: 'none' } }}
+            >
               <ListItemIcon>
                 <MaleOutlined />
               </ListItemIcon>
@@ -81,7 +95,10 @@ export const SideMenu = () => {
           </ListItem>
 
           <ListItem disablePadding>
-            <ListItemButton sx={{ display: { xs: '', sm: 'none' } }}>
+            <ListItemButton
+              onClick={() => navigateTo('/category/women')}
+              sx={{ display: { xs: '', sm: 'none' } }}
+            >
               <ListItemIcon>
                 <FemaleOutlined />
               </ListItemIcon>
@@ -90,7 +107,10 @@ export const SideMenu = () => {
           </ListItem>
 
           <ListItem disablePadding>
-            <ListItemButton sx={{ display: { xs: '', sm: 'none' } }}>
+            <ListItemButton
+              onClick={() => navigateTo('/category/kid')}
+              sx={{ display: { xs: '', sm: 'none' } }}
+            >
               <ListItemIcon>
                 <EscalatorWarningOutlined />
               </ListItemIcon>

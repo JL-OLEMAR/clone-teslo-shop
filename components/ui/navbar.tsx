@@ -1,11 +1,12 @@
-import { SHOP_CONSTANTS } from '@/database'
-import { SearchOutlined, ShoppingCartOutlined } from '@mui/icons-material'
-import { AppBar, Badge, Box, Button, IconButton, Toolbar, Typography } from '@mui/material'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { MenuOutlined, SearchOutlined, ShoppingCartOutlined } from '@mui/icons-material'
+import { AppBar, Badge, Box, Button, IconButton, Toolbar, Typography } from '@mui/material'
+import { useUiContext } from '@/hooks/useUiContext'
 
 export function Navbar() {
   const { asPath } = useRouter()
+  const { toggleSideMenu } = useUiContext()
 
   return (
     <AppBar>
@@ -43,9 +44,15 @@ export function Navbar() {
           </IconButton>
         </Link>
 
-        <Button sx={{ ml: 1 }}>
-          Menu
-        </Button>
+        <IconButton
+          onClick={toggleSideMenu}
+          sx={{ ml: 0.5 }}
+          size='large'
+          edge='start'
+          aria-label='menu'
+        >
+          <MenuOutlined />
+        </IconButton>
       </Toolbar>
     </AppBar>
   )

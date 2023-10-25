@@ -7,7 +7,7 @@ export interface UiState {
 }
 
 const UI_INITIAL_STATE: UiState = {
-  isToggleMenu: true
+  isToggleMenu: false
 }
 
 export function UiProvider({ children }: { children: ReactNode }) {
