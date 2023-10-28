@@ -53,8 +53,8 @@ export default function History() {
           <DataGrid
             rows={rows}
             columns={columns}
-            pageSize={10}
-            rowsPerPageOptions={[10]}
+          // pageSize={10}
+          // rowsPerPageOptions={[10]}
           />
         </Grid>
       </Grid>
