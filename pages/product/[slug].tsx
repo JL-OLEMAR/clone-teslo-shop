@@ -1,29 +1,17 @@
-// import { useRouter } from 'next/router'
-import { type GetServerSideProps } from 'next'
+import type { GetStaticPaths, GetStaticProps } from 'next'
 import { Box, Button, Grid, Typography } from '@mui/material'
 
-// import { initialData } from '@/database/products'
+import { dbProducts } from '@/database'
 import { ShopLayout } from '@/components/layouts'
 import { ProductSlideshow, SizeSelector } from '@/components/products'
 import { ItemCounter } from '@/components/ui'
-// import { useProducts } from '@/hooks'
-import { IProduct } from '@/interfaces'
-import { dbProducts } from '@/database'
-
-// const product = initialData.products[0]
+import { type IProduct } from '@/interfaces'
 
 interface Props {
   product: IProduct
 }
 
 export default function Slug({ product }: Props) {
-  // const { query } = useRouter()
-  // const url = `/products/${query.slug}`
-  // const { products: product, isLoading } = useProducts({ url })
-
-  // if (isLoading) return <h1>Loading</h1>
-  // if (!product) return <h1>Not found</h1>
-
   return (
     <ShopLayout title={product.title} pageDescription={product.description}>
 
@@ -69,9 +57,18 @@ export default function Slug({ product }: Props) {
   )
 }
 
-// You should use getServerSideProps when:
-// - Only if you need to pre-render a page whose data must be fetched at request time
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+export const getStaticPaths: GetStaticPaths = async () => {
+  const slugs = await dbProducts.getAllProductsSlugs()
+
+  return {
+    paths: slugs.map(({ slug }) => ({
+      params: { slug }
+    })),
+    fallback: 'blocking'
+  }
+}
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { slug = '' } = params as { slug: string }
   const product = await dbProducts.getProductBySlug({ slug })
 
@@ -85,6 +82,9 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   }
 
   return {
-    props: { product }
+    props: {
+      product
+    },
+    revalidate: 60 * 60 * 24 // 24 hours
   }
 }

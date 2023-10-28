@@ -11,3 +11,13 @@ export async function getProductBySlug({ slug }: { slug: string }): Promise<IPro
 
   return JSON.parse(JSON.stringify(product))
 }
+
+interface ProductSlug {
+  slug: string
+}
+export async function getAllProductsSlugs(): Promise<ProductSlug[]> {
+  await connect()
+  const slugs = await Product.find().select('slug -_id').lean()
+  await disconnect()
+  return slugs
+}
