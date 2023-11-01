@@ -36,6 +36,7 @@ export const SideMenu = () => {
   const onSearchTerm = () => {
     if (searchTerm.trim().length === 0) return
     navigateTo(`/search/${searchTerm}`)
+    setSearchTerm('')
   }
 
   // Navigate to url and toggle sideMenu
