@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import {
   AccountCircleOutlined,
@@ -29,8 +30,15 @@ import { useUiContext } from '@/hooks'
 
 export const SideMenu = () => {
   const router = useRouter()
+  const [searchTerm, setSearchTerm] = useState('')
   const { isToggleMenu, toggleSideMenu } = useUiContext()
 
+  const onSearchTerm = () => {
+    if (searchTerm.trim().length === 0) return
+    navigateTo(`/search/${searchTerm}`)
+  }
+
+  // Navigate to url and toggle sideMenu
   const navigateTo = (url: string) => {
     router.push(url)
     toggleSideMenu()
@@ -49,13 +57,15 @@ export const SideMenu = () => {
           <ListItem disablePadding>
             <ListItemButton>
               <Input
-                type='text'
+                type='search'
+                autoFocus
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' ? onSearchTerm() : null}
                 placeholder="Men's Quilted Shirt"
                 endAdornment={
                   <InputAdornment position='end'>
-                    <IconButton
-                      aria-label='toggle password visibility'
-                    >
+                    <IconButton onClick={onSearchTerm}>
                       <SearchOutlined />
                     </IconButton>
                   </InputAdornment>

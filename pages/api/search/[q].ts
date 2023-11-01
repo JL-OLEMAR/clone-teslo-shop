@@ -1,12 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { db } from '@/database'
-import { type IProduct } from '@/interfaces'
+import { type LightProduct } from '@/interfaces'
 import { Product } from '@/models'
 
 type Data =
   | { message: string }
-  | IProduct[]
+  | LightProduct[]
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   const method = req.method

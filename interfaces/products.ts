@@ -14,5 +14,7 @@ export interface IProduct {
   updatedAt: string
 }
 
+export type LightProduct = Pick<IProduct, 'title' | 'images' | 'price' | 'inStock' | 'slug'>
+
 export type ISize = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL'
 export type IType = 'shirts' | 'pants' | 'hoodies' | 'hats'

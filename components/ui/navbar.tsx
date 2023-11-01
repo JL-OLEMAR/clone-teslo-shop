@@ -1,12 +1,22 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/indent */
+import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { MenuOutlined, SearchOutlined, ShoppingCartOutlined } from '@mui/icons-material'
-import { AppBar, Badge, Box, Button, IconButton, Toolbar, Typography } from '@mui/material'
+import { AppBar, Badge, Box, Button, IconButton, Input, InputAdornment, Toolbar, Typography } from '@mui/material'
+import { ClearOutlined, MenuOutlined, SearchOutlined, ShoppingCartOutlined } from '@mui/icons-material'
 import { useUiContext } from '@/hooks'
 
 export function Navbar() {
-  const { asPath } = useRouter()
+  const [searchTerm, setSearchTerm] = useState('')
+  const [isSearchVisible, setIsSearchVisible] = useState(false)
+  const router = useRouter()
   const { toggleSideMenu } = useUiContext()
+
+  const onSearchTerm = () => {
+    if (searchTerm.trim().length === 0) return
+    router.push(`/search/${searchTerm}`)
+  }
 
   return (
     <AppBar>
@@ -18,21 +28,58 @@ export function Navbar() {
 
         <Box sx={{ flex: 1 }} />
 
-        <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: 1 }}>
+        <Box
+          sx={{ display: isSearchVisible ? 'none' : { xs: 'none', sm: 'flex' }, gap: 1 }}
+          className='fadeIn'
+        >
           <Link href='/category/men'>
-            <Button color={asPath === '/category/men' ? 'primary' : 'info'}>Men</Button>
+            <Button color={router.asPath === '/category/men' ? 'primary' : 'info'}>Men</Button>
           </Link>
           <Link href='/category/women'>
-            <Button color={asPath === '/category/women' ? 'primary' : 'info'}>Women</Button>
+            <Button color={router.asPath === '/category/women' ? 'primary' : 'info'}>Women</Button>
           </Link>
           <Link href='/category/kid'>
-            <Button color={asPath === '/category/kid' ? 'primary' : 'info'}>Kids</Button>
+            <Button color={router.asPath === '/category/kid' ? 'primary' : 'info'}>Kids</Button>
           </Link>
         </Box>
 
         <Box sx={{ flex: 1 }} />
 
-        <IconButton>
+        {
+          isSearchVisible
+            ? (
+              <Input
+                className='fadeIn'
+                sx={{ display: { xs: 'none', sm: 'flex' } }}
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' ? onSearchTerm() : null}
+                type='search'
+                placeholder='Search...'
+                autoFocus
+                endAdornment={
+                  <InputAdornment position='end'>
+                    <IconButton onClick={() => setIsSearchVisible(false)}>
+                      <ClearOutlined />
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            )
+            : (
+              <IconButton
+                onClick={() => setIsSearchVisible(true)}
+                className='fadeIn'
+                sx={{ display: { xs: 'none', sm: 'flex' } }}
+              >
+                <SearchOutlined />
+              </IconButton>
+            )
+        }
+        <IconButton
+          sx={{ display: { xs: 'flex', sm: 'none' } }}
+          onClick={toggleSideMenu}
+        >
           <SearchOutlined />
         </IconButton>
 
