@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/indent */
 import type { GetStaticPaths, GetStaticProps } from 'next'
-import { Box, Button, Grid, Typography } from '@mui/material'
+import { Box, Button, Chip, Grid, Typography } from '@mui/material'
 
 import { dbProducts } from '@/database'
 import { ShopLayout } from '@/components/layouts'
@@ -38,11 +39,17 @@ export default function Slug({ product }: Props) {
             </Box>
 
             {/* Add to cart button */}
-            <Button color='secondary' className='circular-btn'>
-              Add to cart
-            </Button>
-
-            {/* <Chip label='No stock' color='error' variant='outlined' /> */}
+            {
+              (product.inStock > 0)
+                ? (
+                  <Button color='secondary' className='circular-btn'>
+                    Add to cart
+                  </Button>
+                )
+                : (
+                  <Chip label='No stock' color='error' variant='outlined' />
+                )
+            }
 
             {/* Description */}
             <Box sx={{ mt: 3 }}>

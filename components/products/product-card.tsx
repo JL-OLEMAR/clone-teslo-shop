@@ -1,6 +1,6 @@
-import { Box, Card, CardActionArea, CardMedia, Grid, Typography } from '@mui/material'
-import Link from 'next/link'
 import { useMemo, useState } from 'react'
+import Link from 'next/link'
+import { Box, Card, CardActionArea, CardMedia, Chip, Grid, Typography } from '@mui/material'
 
 import { IProduct } from '@/interfaces'
 
@@ -28,7 +28,18 @@ export function ProductCard({ product }: Props) {
     >
       <Card>
         <Link href={`/product/${product.slug}`} prefetch={false}>
+
           <CardActionArea>
+            {
+              (product.inStock === 0) && (
+                <Chip
+                  color='primary'
+                  label='Not available'
+                  sx={{ position: 'absolute', top: '10px', left: '10px', zIndex: 99 }}
+                />
+              )
+            }
+
             <CardMedia
               sx={{ aspectRatio: '1/1', objectPosition: 'center' }}
               image={productImage}
