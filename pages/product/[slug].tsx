@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/indent */
+import { useState } from 'react'
 import type { GetStaticPaths, GetStaticProps } from 'next'
 import { Box, Button, Chip, Grid, Typography } from '@mui/material'
 
@@ -6,13 +7,31 @@ import { dbProducts } from '@/database'
 import { ShopLayout } from '@/components/layouts'
 import { ProductSlideshow, SizeSelector } from '@/components/products'
 import { ItemCounter } from '@/components/ui'
-import { type IProduct } from '@/interfaces'
+import type { ICartProduct, IProduct, ISize } from '@/interfaces'
 
 interface Props {
   product: IProduct
 }
 
 export default function Slug({ product }: Props) {
+  const [tempCartProduct, setTempCartProduct] = useState<ICartProduct>({
+    _id: product._id,
+    image: product.images[0],
+    price: product.price,
+    slug: product.slug,
+    title: product.title,
+    gender: product.gender,
+    quantity: 1,
+    size: undefined
+  })
+
+  const selectedSize = (size: ISize) => {
+    setTempCartProduct(currentProduct => ({
+      ...currentProduct,
+      size
+    }))
+  }
+
   return (
     <ShopLayout title={product.title} pageDescription={product.description}>
 
@@ -35,7 +54,11 @@ export default function Slug({ product }: Props) {
               <ItemCounter />
 
               {/* Sizes */}
-              <SizeSelector sizes={product.sizes} />
+              <SizeSelector
+                sizes={product.sizes}
+                selectedSize={tempCartProduct.size}
+                onSelectedSize={selectedSize}
+              />
             </Box>
 
             {/* Add to cart button */}
@@ -43,7 +66,7 @@ export default function Slug({ product }: Props) {
               (product.inStock > 0)
                 ? (
                   <Button color='secondary' className='circular-btn'>
-                    Add to cart
+                    {tempCartProduct.size ? 'Add to cart' : 'Select size'}
                   </Button>
                 )
                 : (
