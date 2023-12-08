@@ -25,11 +25,22 @@ export default function Slug({ product }: Props) {
     size: undefined
   })
 
+  const updatedQuantity = (quantity: number) => {
+    setTempCartProduct(currentProduct => ({
+      ...currentProduct,
+      quantity
+    }))
+  }
+
   const selectedSize = (size: ISize) => {
     setTempCartProduct(currentProduct => ({
       ...currentProduct,
       size
     }))
+  }
+
+  const onAddProduct = () => {
+    console.log({ tempCartProduct })
   }
 
   return (
@@ -51,7 +62,13 @@ export default function Slug({ product }: Props) {
             {/* Amount */}
             <Box sx={{ my: 2 }}>
               <Typography variant='subtitle2'>Amount</Typography>
-              <ItemCounter />
+
+              {/* Counter */}
+              <ItemCounter
+                currentValue={tempCartProduct.quantity}
+                maxValue={Math.min(product.inStock, 5)}
+                onUpdatedQuantity={updatedQuantity}
+              />
 
               {/* Sizes */}
               <SizeSelector
@@ -65,7 +82,11 @@ export default function Slug({ product }: Props) {
             {
               (product.inStock > 0)
                 ? (
-                  <Button color='secondary' className='circular-btn'>
+                  <Button
+                    onClick={onAddProduct}
+                    color='secondary'
+                    className='circular-btn'
+                  >
                     {tempCartProduct.size ? 'Add to cart' : 'Select size'}
                   </Button>
                 )
