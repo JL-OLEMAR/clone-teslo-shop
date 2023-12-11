@@ -1,36 +1,35 @@
 /* eslint-disable @typescript-eslint/indent */
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
 import { Box, Button, CardMedia, Grid, Typography } from '@mui/material'
 import Link from 'next/link'
 
 import { useCart } from '@/hooks'
+import { ICartProduct } from '@/interfaces'
 import { ItemCounter } from '../ui'
 
 interface Props {
   canEditable?: boolean
 }
 
-export function CartList({ canEditable = false }: Props) {
-  const { cart: productsCart } = useCart()
-  console.log({ productsCart })
+export function CartList({ canEditable = true }: Props) {
+  const { cart, updateCartQuantity } = useCart()
 
-  const updatedQuantity = (value: number) => {
-    // TODO: Llamar la acción del contexto para actualizar la cantidad
-    console.log({ value })
+  const onUpdatedQuantity = (product: ICartProduct, quantity: number) => {
+    updateCartQuantity({ ...product, quantity })
   }
 
   return (
     <>
       {
-        // productsCart.map(prod => (
-        Object.entries(productsCart).map(([key, prod]) => (
+        cart.map(prod => (
           <Grid
-            key={key}
+            key={prod.slug + prod.size}
             container
             spacing={2}
             sx={{ mb: 2 }}
           >
             <Grid item xs={2} sm={3}>
-              <Link href='/product/slug' style={{ textDecoration: 'none' }}>
+              <Link href={`/product/${prod.slug}`} style={{ textDecoration: 'none' }}>
                 <CardMedia
                   component='img'
                   sx={{ borderRadius: '5px' }}
@@ -51,10 +50,14 @@ export function CartList({ canEditable = false }: Props) {
                       <ItemCounter
                         currentValue={prod.quantity}
                         maxValue={5}
-                        onUpdatedQuantity={updatedQuantity}
+                        onUpdatedQuantity={(qty) => onUpdatedQuantity(prod, qty)}
                       />
                     )
-                    : <Typography variant='body1'>Quantity: <strong>{prod.quantity}</strong></Typography>
+                    : (
+                      <Typography variant='body1'>
+                        Quantity: <strong>{prod.quantity} product{prod.quantity > 1 ? 's' : ''}</strong>
+                      </Typography>
+                    )
                 }
 
               </Box>

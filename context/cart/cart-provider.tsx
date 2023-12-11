@@ -60,8 +60,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
     dispatch({ type: '[Cart] - Update products in cart', payload: updatedProduct })
   }
 
+  const updateCartQuantity = (product: ICartProduct) => {
+    dispatch({ type: '[Cart] - Change product quantity', payload: product })
+  }
+
   return (
-    <CartContext.Provider value={{ ...state, addProductCart }}>
+    <CartContext.Provider value={{ ...state, addProductCart, updateCartQuantity }}>
       {children}
     </CartContext.Provider>
   )

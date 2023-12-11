@@ -4,7 +4,7 @@ import { Box, IconButton, Typography } from '@mui/material'
 interface Props {
   currentValue: number
   maxValue: number
-  onUpdatedQuantity: (newValue: number) => void
+  onUpdatedQuantity: (quantity: number) => void
 }
 
 export function ItemCounter({ currentValue, maxValue, onUpdatedQuantity }: Props) {
@@ -30,7 +30,10 @@ export function ItemCounter({ currentValue, maxValue, onUpdatedQuantity }: Props
 
       <Typography sx={{ width: 40, textAlign: 'center' }}>{currentValue}</Typography>
 
-      <IconButton onClick={() => addOrRemove(1)}>
+      <IconButton
+        onClick={() => addOrRemove(1)}
+        disabled={currentValue >= maxValue}
+      >
         <AddCircleOutline />
       </IconButton>
     </Box>
