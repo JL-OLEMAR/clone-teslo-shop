@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/indent */
 import { useState } from 'react'
 import type { GetStaticPaths, GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
 import { Box, Button, Chip, Grid, Typography } from '@mui/material'
 
 import { dbProducts } from '@/database'
+import { useCart } from '@/hooks'
 import { ShopLayout } from '@/components/layouts'
 import { ProductSlideshow, SizeSelector } from '@/components/products'
 import { ItemCounter } from '@/components/ui'
@@ -14,6 +16,7 @@ interface Props {
 }
 
 export default function Slug({ product }: Props) {
+  const router = useRouter()
   const [tempCartProduct, setTempCartProduct] = useState<ICartProduct>({
     _id: product._id,
     image: product.images[0],
@@ -24,6 +27,8 @@ export default function Slug({ product }: Props) {
     quantity: 1,
     size: undefined
   })
+
+  const { addProductCart } = useCart()
 
   const updatedQuantity = (quantity: number) => {
     setTempCartProduct(currentProduct => ({
@@ -40,7 +45,10 @@ export default function Slug({ product }: Props) {
   }
 
   const onAddProduct = () => {
-    console.log({ tempCartProduct })
+    if (!tempCartProduct.size) { return }
+
+    addProductCart(tempCartProduct)
+    void router.push('/cart')
   }
 
   return (
@@ -84,6 +92,7 @@ export default function Slug({ product }: Props) {
                 ? (
                   <Button
                     onClick={onAddProduct}
+                    disabled={!tempCartProduct.size}
                     color='secondary'
                     className='circular-btn'
                   >
