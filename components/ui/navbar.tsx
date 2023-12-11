@@ -5,13 +5,13 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { AppBar, Badge, Box, Button, IconButton, Input, InputAdornment, Toolbar, Typography } from '@mui/material'
 import { ClearOutlined, MenuOutlined, SearchOutlined, ShoppingCartOutlined } from '@mui/icons-material'
-import { useUiContext } from '@/hooks'
+import { useUi } from '@/hooks'
 
 export function Navbar() {
   const [searchTerm, setSearchTerm] = useState('')
   const [isSearchVisible, setIsSearchVisible] = useState(false)
   const router = useRouter()
-  const { toggleSideMenu } = useUiContext()
+  const { toggleSideMenu } = useUi()
 
   const onSearchTerm = () => {
     if (searchTerm.trim().length === 0) return

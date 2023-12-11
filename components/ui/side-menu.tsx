@@ -26,12 +26,12 @@ import {
   ListItemText,
   ListSubheader
 } from '@mui/material'
-import { useUiContext } from '@/hooks'
+import { useUi } from '@/hooks'
 
 export const SideMenu = () => {
   const router = useRouter()
   const [searchTerm, setSearchTerm] = useState('')
-  const { isToggleMenu, toggleSideMenu } = useUiContext()
+  const { isToggleMenu, toggleSideMenu } = useUi()
 
   const onSearchTerm = () => {
     if (searchTerm.trim().length === 0) return
