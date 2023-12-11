@@ -1,20 +1,37 @@
-import { useReducer, type ReactNode } from 'react'
+import { useReducer, type ReactNode, useEffect } from 'react'
+import Cookie from 'js-cookie'
+
 import { CartContext } from './cart-context'
 import { cartReducer } from './cart-reducer'
 import { type ICartProduct } from '@/interfaces'
 
 export interface CartState {
   cart: ICartProduct[]
-  addProductCart: (product: ICartProduct) => void
 }
 
 const CART_INITIAL_STATE: CartState = {
-  cart: [],
-  addProductCart: () => { }
+  cart: []
 }
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(cartReducer, CART_INITIAL_STATE)
+
+  useEffect(() => {
+    const cartType = '[Cart] - LoadCart from cookies | storage'
+    try {
+      const cartCookie = Cookie.get('cart')
+      const cookieProducts = cartCookie ? JSON.parse(cartCookie) : []
+      dispatch({ type: cartType, payload: cookieProducts })
+    } catch (error) {
+      console.error('Error while parsing cart cookie:')
+      dispatch({ type: cartType, payload: [] })
+    }
+  }, [])
+
+  useEffect(() => {
+    if (state.cart.length === 0) return
+    Cookie.set('cart', JSON.stringify(state.cart), { expires: 7 })
+  }, [state.cart])
 
   const addProductCart = (product: ICartProduct) => {
     const isProductInCart = (p: ICartProduct) => p._id === product._id
