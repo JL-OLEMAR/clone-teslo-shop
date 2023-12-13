@@ -12,7 +12,7 @@ interface Props {
 }
 
 export function CartList({ canEditable = true }: Props) {
-  const { cart, updateCartQuantity } = useCart()
+  const { cart, updateCartQuantity, removeCartProduct } = useCart()
 
   const onUpdatedQuantity = (product: ICartProduct, quantity: number) => {
     updateCartQuantity({ ...product, quantity })
@@ -55,7 +55,10 @@ export function CartList({ canEditable = true }: Props) {
                     )
                     : (
                       <Typography variant='body1'>
-                        Quantity: <strong>{prod.quantity} product{prod.quantity > 1 ? 's' : ''}</strong>
+                        Quantity:
+                        <strong>
+                          {' ' + prod.quantity} product{prod.quantity > 1 ? 's' : ''}
+                        </strong>
                       </Typography>
                     )
                 }
@@ -67,7 +70,14 @@ export function CartList({ canEditable = true }: Props) {
               <Box display='flex' flexDirection='column' alignItems='center'>
                 <Typography variant='subtitle1'>${prod.price}</Typography>
                 {
-                  canEditable && (<Button color='secondary' variant='text'>Remove</Button>)
+                  canEditable && (
+                    <Button
+                      onClick={() => removeCartProduct(prod)}
+                      color='secondary'
+                      variant='text'
+                    >
+                      Remove
+                    </Button>)
                 }
               </Box>
             </Grid>

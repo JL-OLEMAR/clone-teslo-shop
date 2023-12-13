@@ -29,7 +29,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [])
 
   useEffect(() => {
-    if (state.cart.length === 0) return
+    if (state.cart.length <= 0) return
     Cookie.set('cart', JSON.stringify(state.cart), { expires: 7 })
   }, [state.cart])
 
@@ -64,8 +64,20 @@ export function CartProvider({ children }: { children: ReactNode }) {
     dispatch({ type: '[Cart] - Change product quantity', payload: product })
   }
 
+  const removeCartProduct = (product: ICartProduct) => {
+    dispatch({ type: '[Cart] - Remove product in cart', payload: product })
+    Cookie.remove('cart')
+    Cookie.set('cart', JSON.stringify([]), { expires: 7 })
+  }
+
   return (
-    <CartContext.Provider value={{ ...state, addProductCart, updateCartQuantity }}>
+    <CartContext.Provider value={{
+      ...state,
+      addProductCart,
+      updateCartQuantity,
+      removeCartProduct
+    }}
+    >
       {children}
     </CartContext.Provider>
   )
