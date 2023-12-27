@@ -15,6 +15,9 @@ interface Props {
   product: IProduct
 }
 
+// Limit items
+const MAX_ITEMS = +(process.env.NEXT_PUBLIC_MAX_ITEMS ?? 10)
+
 export default function Slug({ product }: Props) {
   const router = useRouter()
   const [tempCartProduct, setTempCartProduct] = useState<ICartProduct>({
@@ -74,7 +77,7 @@ export default function Slug({ product }: Props) {
               {/* Counter */}
               <ItemCounter
                 currentValue={tempCartProduct.quantity}
-                maxValue={Math.min(product.inStock, 5)}
+                maxValue={Math.min(product.inStock, MAX_ITEMS)}
                 onUpdatedQuantity={updatedQuantity}
               />
 

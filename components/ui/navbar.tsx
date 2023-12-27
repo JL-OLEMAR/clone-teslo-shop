@@ -5,12 +5,16 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { AppBar, Badge, Box, Button, IconButton, Input, InputAdornment, Toolbar, Typography } from '@mui/material'
 import { ClearOutlined, MenuOutlined, SearchOutlined, ShoppingCartOutlined } from '@mui/icons-material'
-import { useUi } from '@/hooks'
+import { useCart, useUi } from '@/hooks'
+
+// Limit items
+const MAX_ITEMS = +(process.env.NEXT_PUBLIC_MAX_ITEMS ?? 10)
 
 export function Navbar() {
   const [searchTerm, setSearchTerm] = useState('')
   const [isSearchVisible, setIsSearchVisible] = useState(false)
   const router = useRouter()
+  const { numberOfItems } = useCart()
   const { toggleSideMenu } = useUi()
 
   const onSearchTerm = () => {
@@ -85,7 +89,10 @@ export function Navbar() {
 
         <Link href='/cart'>
           <IconButton>
-            <Badge badgeContent={2} color='secondary'>
+            <Badge
+              badgeContent={numberOfItems > MAX_ITEMS ? `+${MAX_ITEMS}` : numberOfItems}
+              color='secondary'
+            >
               <ShoppingCartOutlined />
             </Badge>
           </IconButton>

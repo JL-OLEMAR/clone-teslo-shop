@@ -11,6 +11,9 @@ interface Props {
   canEditable?: boolean
 }
 
+// Limit items
+const MAX_ITEMS = +(process.env.NEXT_PUBLIC_MAX_ITEMS ?? 10)
+
 export function CartList({ canEditable = true }: Props) {
   const { cart, updateCartQuantity, removeCartProduct } = useCart()
 
@@ -49,7 +52,7 @@ export function CartList({ canEditable = true }: Props) {
                     ? (
                       <ItemCounter
                         currentValue={prod.quantity}
-                        maxValue={5}
+                        maxValue={MAX_ITEMS}
                         onUpdatedQuantity={(qty) => onUpdatedQuantity(prod, qty)}
                       />
                     )

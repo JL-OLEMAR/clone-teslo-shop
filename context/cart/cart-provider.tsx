@@ -7,10 +7,18 @@ import { type ICartProduct } from '@/interfaces'
 
 export interface CartState {
   cart: ICartProduct[]
+  numberOfItems: number
+  subTotal: number
+  tax: number
+  total: number
 }
 
 const CART_INITIAL_STATE: CartState = {
-  cart: []
+  cart: [],
+  numberOfItems: 0,
+  subTotal: 0,
+  tax: 0,
+  total: 0
 }
 
 export function CartProvider({ children }: { children: ReactNode }) {
@@ -31,6 +39,20 @@ export function CartProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (state.cart.length <= 0) return
     Cookie.set('cart', JSON.stringify(state.cart), { expires: 7 })
+  }, [state.cart])
+
+  useEffect(() => {
+    const numberOfItems = state.cart.reduce((prev, current) => current.quantity + prev, 0)
+    const subTotal = state.cart.reduce((prev, { price, quantity }) => (price * quantity) + prev, 0)
+    const taxRate = Number(process.env.NEXT_PUBLIC_TAX_RATE ?? 0)
+
+    const orderSummary = {
+      numberOfItems,
+      subTotal,
+      tax: subTotal * taxRate,
+      total: subTotal * (1 + taxRate)
+    }
+    dispatch({ type: '[Cart] - Update order summary', payload: orderSummary })
   }, [state.cart])
 
   const addProductCart = (product: ICartProduct) => {
