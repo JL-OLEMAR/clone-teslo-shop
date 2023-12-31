@@ -3,7 +3,7 @@ export interface IUser {
   name: string
   email: string
   role: string
-  passport?: string
+  password?: string
   createdAt?: string
   updatedAt?: string
 }
