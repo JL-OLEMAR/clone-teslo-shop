@@ -1,13 +1,20 @@
 @hostname = http://localhost:3000/api
 
 ### Add products as a seed only in dev environment
-GET {{hostname}}/seed
+GET {{hostname}}/seed HTTP/1.1
 
 ### GetProducts by gender, default gender=all
-GET {{hostname}}/products?gender=men
+GET {{hostname}}/products?gender=men HTTP/1.1
 
 ### GetProducts by slug
-GET {{hostname}}/products/mens_chill_crew_neck_sweatshirt
+GET {{hostname}}/products/mens_chill_crew_neck_sweatshirt HTTP/1.1
 
 ### SearchProducts by query at (title and tags)
-GET {{hostname}}/search/shirt
+GET {{hostname}}/search/shirt HTTP/1.1
+
+### login Authorization: token xxx
+POST {{hostname}}/user/login HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+email=juan@gmail.com
+&pwd=123456

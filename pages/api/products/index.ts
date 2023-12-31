@@ -12,7 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   const method = req.method
   if (method === Method.GET) return await getProducts(req, res)
 
-  return res.status(400).json({ message: 'Method not allowed' })
+  return res.status(405).json({ message: 'Method not allowed' })
 }
 
 const getProducts = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
