@@ -25,9 +25,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
 const loginUser = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   const { email = '', pwd = '' } = req.body
+  const emailLowerCase = email.toLowerCase()
 
   await db.connect()
-  const user = await User.findOne({ email })
+  const user = await User.findOne({ email: emailLowerCase })
   await db.disconnect()
 
   if (!user) {
@@ -40,7 +41,7 @@ const loginUser = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
     return res.status(400).json({ message: 'Password or email incorrect' })
   }
 
-  const token = jwt.signToken({ _id, email })
+  const token = jwt.signToken({ _id, email: emailLowerCase })
 
   return res.status(200).json({
     token,
