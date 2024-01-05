@@ -12,9 +12,17 @@ GET {{hostname}}/products/mens_chill_crew_neck_sweatshirt HTTP/1.1
 ### SearchProducts by query at (title and tags)
 GET {{hostname}}/search/shirt HTTP/1.1
 
-### login Authorization: token xxx
+### Login
 POST {{hostname}}/user/login HTTP/1.1
 Content-Type: application/x-www-form-urlencoded
 
 email=juan@gmail.com
+&pwd=123456
+
+### Register user
+POST {{hostname}}/user/register HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+name=Alex Goe
+&email=alex@gmail.com
 &pwd=123456
